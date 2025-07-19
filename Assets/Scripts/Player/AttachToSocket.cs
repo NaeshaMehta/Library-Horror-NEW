@@ -13,19 +13,19 @@ public class AttachToSocket : MonoBehaviour
             return;
         }
         print("Attach called");
-        if (pickUp.equippedItem != null)
+        if (pickUp.rightEquippedItem != null)
         {
             // Disable the collider of the equipped item
-            SphereCollider sphereCollider = pickUp.equippedItem.GetComponent<SphereCollider>();
+            SphereCollider sphereCollider = pickUp.rightEquippedItem.GetComponent<SphereCollider>();
             if (sphereCollider != null)
             {
                 sphereCollider.enabled = false;
             }
             // Set the parent of the equipped item to the hand socket
-            pickUp.equippedItem.transform.SetParent(pickUp.handSocket);
+            pickUp.rightEquippedItem.transform.SetParent(pickUp.rightHandSocket);
             // Reset the local position and rotation of the equipped item
-            pickUp.equippedItem.transform.localPosition = Vector3.zero;
-            pickUp.equippedItem.transform.localRotation = Quaternion.identity;
+            pickUp.rightEquippedItem.transform.localPosition = Vector3.zero;
+            pickUp.rightEquippedItem.transform.localRotation = Quaternion.identity;
         }
     }
 }

@@ -1,14 +1,25 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations.Rigging;
 
 public class PickUp : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private Rig rightHandRig;
+    [SerializeField] private Rig leftHandRig;
 
     GameObject ovelappedItem;
-    [HideInInspector] public GameObject equippedItem;
-    public Transform handSocket;
+    [HideInInspector] public GameObject rightEquippedItem;
+    [HideInInspector] public GameObject leftEquippedItem;
+
+    public Transform rightHandSocket;
+    public Transform leftHandSocket;
+
     public static PlayerInputHandler Instance { get; private set; }
+    private float lerpRightElapsedTime = 0f;
+    private bool isRightLerping = false;
+    private float lerpLeftElapsedTime = 0f;
+    private bool isLeftLerping = false;
 
     public void SetOverlappingItem(GameObject item)
     {
@@ -17,39 +28,76 @@ public class PickUp : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerInputHandler.Instance.InteractAction.performed += OnInteract;
+        PlayerInputHandler.Instance.InteractRightAction.performed += OnInteractRight;
+        PlayerInputHandler.Instance.InteractLeftAction.performed += OnInteractLeft;
     }
 
     void OnDisable()
     {
-        //PlayerInputHandler.Instance.InteractAction.performed -= OnInteract;
+
     }
 
-    private void OnInteract(InputAction.CallbackContext context)
+    private void OnInteractRight(InputAction.CallbackContext context)
     {
         if (ovelappedItem != null)
         {
-            equippedItem = ovelappedItem;
-            animator.SetTrigger("Pick up"); // Trigger the pick-up animation
-            //ovelappedItem.GetComponent<SphereCollider>().enabled = false;
-            //ovelappedItem.transform.SetParent(handSocket); 
-            //equippedItem.transform.localPosition = Vector3.zero; 
-            //equippedItem.transform.localRotation = Quaternion.identity;
+            rightEquippedItem = ovelappedItem;
+            ovelappedItem = null;
+            rightEquippedItem.GetComponent<SphereCollider>().enabled = false;
+            rightEquippedItem.transform.SetParent(rightHandSocket);
+            rightEquippedItem.transform.localPosition = Vector3.zero;
+            rightEquippedItem.transform.localRotation = Quaternion.identity;
+            isRightLerping = true;
+
+
+        }
+    }
+    private void OnInteractLeft(InputAction.CallbackContext context)
+    {
+        if (ovelappedItem != null)
+        {
+            leftEquippedItem = ovelappedItem;
+            ovelappedItem = null;
+            leftEquippedItem.GetComponent<SphereCollider>().enabled = false;
+            leftEquippedItem.transform.SetParent(leftHandSocket);
+            leftEquippedItem.transform.localPosition = Vector3.zero;
+            leftEquippedItem.transform.localRotation = Quaternion.identity;
+            isLeftLerping = true;
         }
     }
 
     void Start()
     {
-
         if (animator == null)
         {
             Debug.LogError("Animator component not found on the player object.");
         }
     }
 
-    void AttachObject()
+    private void Update()
     {
-        print("PickUp Attach Object called");
+        if (isRightLerping)
+        {
+            lerpRightElapsedTime += Time.deltaTime;
+            rightHandRig.weight = Mathf.Lerp(0, 1, lerpRightElapsedTime * 2);
+            if(rightHandRig.weight ==1)
+            {
+                isRightLerping = false;
+                lerpRightElapsedTime = 0f;
+            }
+        }
+        if (isLeftLerping)
+        { 
+            lerpLeftElapsedTime += Time.deltaTime;
+            leftHandRig.weight = Mathf.Lerp(0, 1, lerpLeftElapsedTime * 2);
+            if (leftHandRig.weight == 1)
+            {
+                isLeftLerping = false;
+                lerpLeftElapsedTime = 0f;
+            }
+        }
     }
+
+
 
 }

@@ -4188,6 +4188,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4095854991498165274, guid: 4b25e90d2f3925b48b9bbd14cceb2eb3, type: 3}
   m_PrefabInstance: {fileID: 798568205}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &804175879 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7721989880735397250, guid: b041b4cbb66c2364e938ddc9259a58a8, type: 3}
+  m_PrefabInstance: {fileID: 1095506717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &812112286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5105,7 +5110,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997921818}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5892dcbb77693047b7d3846cbcd0dad, type: 3}
   m_Name: 
@@ -5132,7 +5137,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1095506717}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997921818}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 997ca0673bbe5414598669fb560a86f8, type: 3}
   m_Name: 
@@ -5144,7 +5149,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997921818}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e7bab52fb4844674d8191d998ae28e26, type: 3}
@@ -5935,6 +5940,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3783733021526285551, guid: b041b4cbb66c2364e938ddc9259a58a8, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 804175879}
     - target: {fileID: 3967107162413205566, guid: b041b4cbb66c2364e938ddc9259a58a8, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -6057,7 +6066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7717348707959960147, guid: b041b4cbb66c2364e938ddc9259a58a8, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7717348707959960147, guid: b041b4cbb66c2364e938ddc9259a58a8, type: 3}
       propertyPath: footstepAudioSource

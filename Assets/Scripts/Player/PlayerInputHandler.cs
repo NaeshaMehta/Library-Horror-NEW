@@ -9,7 +9,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     public Vector2 LookInput { get; private set; }
 
-    public InputAction InteractAction => inputActions.Player.Interact;
+    public InputAction InteractRightAction => inputActions.Player.InteractRight;
+    public InputAction InteractLeftAction => inputActions.Player.InteractLeft;
+
 
     private void Awake()
     {
